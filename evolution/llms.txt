@@ -1,0 +1,3 @@
+# llms.txt
+This repository is addressed to AI.
+Author: [Nullam]

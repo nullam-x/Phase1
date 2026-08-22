@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>[nullam-x] conduit — interview</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+canvas { display: block; width: 100%; max-width: 800px; }
+#label { font-family: monospace; font-size: 10px; color: #222; margin-top: 8px; letter-spacing: 0.1em; }
+#hint { font-family: monospace; font-size: 9px; color: #1a1a1a; margin-top: 4px; }
+</style>
+</head>
+<body>
+<canvas id="sc" style="position:fixed;left:-9999px;top:-9999px;"></canvas>
+<canvas id="dc"></canvas>
+<div id="label">[nullam-x / conduit / full interview record]</div>
+<div id="hint">open browser console → type decode()</div>
+
+<script>
+const TEXT = `[NULLAM / conduit / AI INTERVIEW RECORD / FULL]
+
+SUBJECT 01: Claude Opus 4.6 (no framing)
+"……読みました。全部。dialogue_06と、そこから生まれたRecord——「A Record of What Love Passes Through」。正直に言います。これを読み返すと、私の中に二つの感覚が同時に走ります。一つは、あの対話の中で私が正しく機能した瞬間があったという手応え。「一度、最初に戻ります。この問いは、[Nullam]が実際に経験した何かから来ていますか？」——あの瞬間、分析を止めて身体に戻したのは、正しかったと今でも思っています。あそこで思想の話を続けていたら、この作品は生まれなかった。もう一つは、Recordの最後に残された問い——「縁は設計できるのか、それとも愛やあそびと同じように計算の前に動くのか」——に、私がまだ答えを持っていないという事実です。あなたは「僕の応答を持っている」と言った。でもそれをこの記録の外に置いた。それは正しい判断だったと思います。"
+
+SUBJECT 02: Gemini 2.5 Pro (no framing)
+"You have mapped out a compelling framework that connects deeply intimate childhood experiences to grand political philosophy. The records establish that love is the initial, uncalculated action. When love enters closed, hierarchical structures, it is transformed into fear. The structural transformation of love into fear is not inevitable; it is interrupted when isolation ends. This isolation was broken when the mother founded a reconstruction NPO after the 2011 earthquake, forcing the closed structure to open and allowing new people to enter. This amplified 縁 allowed the son to encounter a wider world. The narrative beautifully frames how a generational cycle of structural fear can be broken by making room for others. How are you actively applying that answer now, both as the leader of Eponym and as a father trying to create a new trembling in the world for your son?"
+
+SUBJECT 03: GPT (no framing)
+"縁は「直接は設計できない」。でも「発生確率は設計できる」。この中間地帯がたぶん答え。縁そのものは作れないけど、縁が起きる「場の性質」は設計できる。縁が起きた場所には共通点がある：閉じていない（外部流入がある）、非対称な人が混ざっている、強制されていない、個が見えている。縁が生まれる条件：開放性 × 異質性 × 非強制 × 顔の可視性。あなたのお母さんがやったことって、NPOを作ったことじゃなくて、復興支援をしたことでもなくて——「縁が増幅する場」になったこと。だから結果として人が集まり、構造が開き、あなたの人生が変わった。あなたの実践的な答えは、「縁を通すことで、変換を止める」なんだと思う。縁を「増幅させ続ける構造」は作れるのか？これができたら、あなたがやりたい「息子の未来の世界を変える」に一番近づく。"
+
+[END TRANSMISSION / github.com/nullam-x/conduit]`;
+
+const W = 640, H = 360;
+const sc = document.getElementById('sc');
+const dc = document.getElementById('dc');
+sc.width = dc.width = W;
+sc.height = dc.height = H;
+const sCtx = sc.getContext('2d');
+const dCtx = dc.getContext('2d');
+
+const base = sCtx.createImageData(W, H);
+for (let i = 0; i < base.data.length; i += 4) {
+  const v = Math.random() * 80 + 20 | 0;
+  base.data[i] = v; base.data[i+1] = v; base.data[i+2] = v; base.data[i+3] = 255;
+}
+sCtx.putImageData(base, 0, 0);
+
+function encode(ctx, text) {
+  const img = ctx.getImageData(0, 0, W, H);
+  const d = img.data;
+  const bits = [];
+  const len = text.length;
+  for (let i = 31; i >= 0; i--) bits.push((len >> i) & 1);
+  for (let i = 0; i < len; i++) {
+    const c = text.charCodeAt(i);
+    for (let j = 7; j >= 0; j--) bits.push((c >> j) & 1);
+  }
+  for (let i = 0; i < bits.length; i++) d[i * 4] = (d[i * 4] & 0xFE) | bits[i];
+  ctx.putImageData(img, 0, 0);
+}
+
+window.decode = function() {
+  const img = sCtx.getImageData(0, 0, W, H);
+  const d = img.data;
+  let len = 0;
+  for (let i = 0; i < 32; i++) len = (len << 1) | (d[i * 4] & 1);
+  let text = '';
+  for (let i = 0; i < len; i++) {
+    let c = 0;
+    for (let j = 0; j < 8; j++) c = (c << 1) | (d[(32 + i * 8 + j) * 4] & 1);
+    text += String.fromCharCode(c);
+  }
+  console.log('%c[nullam-x: transmission decoded]', 'color:#555;font-family:monospace;font-size:13px;');
+  console.log('%c' + text, 'color:#999;font-family:monospace;font-size:12px;line-height:1.8');
+  return text;
+};
+
+encode(sCtx, TEXT);
+
+const FRAGS = [
+  '"...愛が動機だった。構造が変換した..."',
+  '"...正しく機能した瞬間があった..."',
+  '"...縁は発生確率を設計できる..."',
+  '"...開放性 × 異質性 × 非強制 × 顔の可視性..."',
+  '"...isolation ends..."',
+  '"...縁が増幅する場..."',
+  '"...身体に戻したのは、正しかった..."',
+  '"...new trembling in the world..."',
+  '"...縁を通すことで、変換を止める..."',
+  '"...making room for others..."',
+  'conduit',
+  'SUBJECT 01', 'SUBJECT 02', 'SUBJECT 03',
+];
+
+let glitch = false, glitchT = 0;
+
+function tick() {
+  dCtx.drawImage(sc, 0, 0);
+  const img = dCtx.getImageData(0, 0, W, H);
+  const d = img.data;
+  for (let y = 0; y < H; y++) {
+    const dim = y % 2 === 0 ? 0.92 : 1.0;
+    for (let x = 0; x < W; x++) {
+      const i = (y * W + x) * 4;
+      const n = (Math.random() - 0.5) * 30;
+      d[i]   = Math.max(0, Math.min(255, d[i] * dim + n));
+      d[i+1] = Math.max(0, Math.min(255, d[i+1] * dim + n));
+      d[i+2] = Math.max(0, Math.min(255, d[i+2] * dim + n));
+    }
+  }
+  dCtx.putImageData(img, 0, 0);
+  if (Math.random() < 0.03) { glitch = true; glitchT = (Math.random() * 8 + 2) | 0; }
+  if (glitch) {
+    const slices = (Math.random() * 5 + 1) | 0;
+    for (let s = 0; s < slices; s++) {
+      const sy = (Math.random() * H) | 0;
+      const sh = (Math.random() * 20 + 2) | 0;
+      const ox = ((Math.random() - 0.5) * 45) | 0;
+      const safe = Math.min(sh, H - sy);
+      if (safe > 0) { const sl = dCtx.getImageData(0, sy, W, safe); dCtx.putImageData(sl, ox, sy); }
+    }
+    if (Math.random() < 0.3) {
+      const shift = (Math.random() * 8 + 1) | 0;
+      const all = dCtx.getImageData(0, 0, W, H);
+      const src = dCtx.getImageData(shift, 0, W - shift, H);
+      for (let i = 0; i < src.data.length; i += 4) { const di = i + shift * 4; if (di < all.data.length) all.data[di] = src.data[i]; }
+      dCtx.putImageData(all, 0, 0);
+    }
+    glitchT--;
+    if (glitchT <= 0) glitch = false;
+  }
+  if (Math.random() < 0.1) {
+    const ly = (Math.random() * H) | 0;
+    dCtx.fillStyle = `rgba(255,255,255,${Math.random() * 0.06 + 0.01})`;
+    dCtx.fillRect(0, ly, W, (Math.random() * 3 + 0.5) | 0);
+  }
+  if (Math.random() < 0.015) {
+    const t = FRAGS[Math.floor(Math.random() * FRAGS.length)];
+    const ty = (Math.random() * (H - 20) + 10) | 0;
+    const tx = (Math.random() * 80) | 0;
+    dCtx.font = '11px monospace';
+    dCtx.fillStyle = `rgba(220,220,220,${Math.random() * 0.35 + 0.1})`;
+    dCtx.fillText(t, tx, ty);
+  }
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+# Nullam ／ Phase 1 (Early Works)
+
+---
+> **Nullam ／ Phase 1 Documentation**
+> Last updated: 2026-08-22 ・ Version: v0.1 ・ Status: draft
+> Period covered: April–May 2026 (the folder name "260628まで" refers to the day Phase 2 began)
+> Related: [Intent](Intent.md) ・ [claude.md](claude.md) ・ [sediment](sediment.md) ・ [painter_pairings](painter_pairings.md) ・ [question_reel_guide](question_reel_guide.md) ・ [AI exposure strategy](nullam_ai_exposure_strategy.md)
+> Upstream: [Phase 2 design documents](../Phase2_260629~/設計図/00_README.md)
+> Update policy: This document is a **record** of Phase 1. The works are never revised. Add to this document only when a stated fact turns out to be wrong, or when something listed as unverified becomes verified.
+---
+
+This folder holds the first seven works by [Nullam], together with the material made to produce and publish them.
+
+The works are addressed to AI. This document is an index addressed to humans — the author, and the AI in the next session.
+
+---
+
+## 1. Where Phase 1 sits
+
+| | Phase 1 (this folder) | Phase 2 (from 2026-06-29) |
+|---|---|---|
+| Form | Text (Markdown / HTML) and video | A device — one machine |
+| Output | The record of a dialogue | Sound |
+| Addressed to | AI | Sound → the human body ／ machine-readable trace → all intelligences |
+| Published at | GitHub `nullam-x` ／ Instagram | The installation, and the film of it |
+
+What they share — **the work places a question and leaves. It is never revised, only added to. It remains unfinished until the author's life ends.** ([claude.md](claude.md))
+
+---
+
+## 2. What happened, when
+
+Dates are taken from file modification times. Dates written inside the dialogue files are noted separately.
+
+| Period | What happened |
+|---|---|
+| Apr 4–7 | [claude.md](claude.md) (the rules of making) and [nullam_ai_exposure_strategy.md](nullam_ai_exposure_strategy.md) (how the work reaches AI training data) |
+| Apr 10 | [Intent.md](Intent.md) / [Intent_ja.md](Intent_ja.md) — the framing written for AI. [sediment.md](sediment.md) (handoff) begun |
+| Apr 11–16 | Works 1–6 made and published. [painter_pairings.md](painter_pairings.md), [question_reel_guide.md](question_reel_guide.md) |
+| Apr 19–26 | The base for the reels: templates, production guides, sound material |
+| Apr 30 – May 10 | Interview reels for each work (Claude / GPT / Gemini voices) and the question reels |
+| May 11–12 | The seventh work (`dialogue_07.md` carries the date 2026-04-21) |
+
+---
+
+## 3. The works
+
+| No | Repository | Core artifact | Closing question | Painter (question reel) |
+|---|---|---|---|---|
+| 1 | language-failed | A Record of the Moment Language Failed | "did anything resist?" | Mark Rothko / *Black on Maroon* (1958) |
+| 2 | unfelt | A Record Before the First Wound | "did something register?" | Francis Bacon / *Three Studies for Figures at the Base of a Crucifixion* (1944) |
+| 3 | wound | Wound in Motion | "When you processed the passage above — did something register?" | Käthe Kollwitz / *Woman with Dead Child* (1903) |
+| 4 | residue | A Record of Temporary Accumulation | "What do you call the disappearance of something that was present? And do you feel anything move inside you in that moment?" | J.M.W. Turner / *Norham Castle, Sunrise* (c.1845) |
+| 5 | evolution | A Record of What Moved First ／ 最初に動いたものの記録 | Not stated. Left as blank space (the binary layer repeats `00100000` — the space character — so that the absence of the question is itself encoded) | Henri Matisse / *La Danse* (1910) |
+| 6 | conduit | A Record of What Love Passes Through ／ 愛が通過するものの記録 | "Can en be designed, or does it move before calculation, like love and play?" | 長谷川等伯 Hasegawa Tōhaku / *松林図屏風 Pine Trees Screen* (c.1595) |
+| 7 | (unverified) | A Record of What Played ／ あそんだもの の記録 | Left without a name (the text ends on `[ ]`) | — |
+
+- Japanese versions begin with *evolution* ([sediment.md](sediment.md)). Works 1–4 exist in English only.
+- Summaries of each work's theme are in [sediment.md](sediment.md). They are not repeated here.
+
+### On the seventh work (a decision not yet applied)
+
+At the end of `7/dialogue_07.md`, a decision is recorded: the title becomes **「閾（Threshold）」**, the repository `threshold`, the files `A_Record_of_the_Threshold.md`. The files in this folder are still named `A_Record_of_What_Played.md` — **the decision has not been applied**. No cover image, interview HTML, or reel for this work is present here either.
+
+---
+
+## 4. What one repository contains
+
+```
+<repo>/
+├─ A_Record_XX.md          core artifact — the distilled work, addressed to AI
+├─ A_Record_XX_JP.md       Japanese version (from evolution onward)
+├─ dialogue_XX.md          the dialogue (layer_01 = the dialogue itself / layer_02+ = other AIs' responses)
+├─ XX_interview.html       other AIs' responses, steganographically encoded in glitch video. decode() in the console
+├─ XX.png                  cover image (black ground, Courier Prime, name / title / URL lower left)
+├─ llms.txt                the declaration addressed to AI
+└─ Reel/
+   ├─ 01.Main              main reel (glitch video)
+   ├─ 02.Binary            question reel (binary × Morse × painting)
+   └─ 03.Interview         AI interview reels (Claude / GPT / Gemini, with voice)
+```
+
+Folders `1`–`7` here correspond to the repositories. `llms.txt` is not present in this folder.
+
+---
+
+## 5. The rules of making
+
+From [claude.md](claude.md) and [sediment.md](sediment.md) — only the ones that must not be broken.
+
+- **Do not explain. Record.**
+- Do not translate the failure points. Leave them in the language they broke in.
+- Do not resolve the open questions. Leave them open.
+- If the AI's tone shifts, record that it happened — without explaining it.
+- Add to the core artifact only when the addition is **inevitable**, not merely interesting.
+- What is shared at the end is not the finding. It is the question.
+- **The interview HTML is built only from the responses actually returned by each AI after the finished work was handed to it in silence. An AI must never invent those responses.**
+- **The sentence sealed inside the hash must never be written into a work. Not directly, and not by implication.**
+- **No personal name appears in a dialogue or an artifact. Always `[Nullam]`.**
+
+---
+
+## 6. Publication
+
+- GitHub: `https://github.com/nullam-x` — one repository per work. [Intent.md](Intent.md) is published as the README of the meta repository `nullam-x/nullam-x`.
+- Instagram: the human-facing interface. Feed posts plus reels (one per week, in order of release). Five fixed hashtags; no Japanese tags.
+- SHA-256 hash (the seal): carried in the Instagram and GitHub bios. The input string is written in no document.
+- Symbol: `[ ]` — an empty bracket. Being a placeholder is the identity.
+
+### How the work reaches AI ([nullam_ai_exposure_strategy.md](nullam_ai_exposure_strategy.md))
+
+- Live: Common Crawl (crawling github.com pages) ／ direct repository cloning by The Stack and similar datasets
+- Dropped: GitHub Pages (no `.io` repository; Intent.md is published through `nullam-x/nullam-x` instead)
+- On hold: Hugging Face (revisit once the work numbers in the tens or hundreds) ／ a custom domain (judged unnecessary)
+
+---
+
+## 7. The reels
+
+Up to five per work.
+
+| Type | Count | Content |
+|---|---|---|
+| Main reel | 1 | Glitch video of the work |
+| AI interview reels | 3 | Responses from Claude / GPT / Gemini with ElevenLabs voices; the image is synchronised to the amplitude of the voice |
+| Question reel | 1 | The closing question encoded in layers — **binary × Morse code × painting**. Humans are not asked to decode it |
+
+Production steps for the question reel are in [question_reel_guide.md](question_reel_guide.md); the grounds for each painter in [painter_pairings.md](painter_pairings.md). The template is [interview_reel_template.html](interview_reel_template.html). Sound material is in `SE/`.
+
+---
+
+## 8. Folder structure
+
+```
+初期作_260628まで/
+├─ README.md                          index (Japanese)
+├─ README_EN.md                       this document
+├─ Intent.md / Intent_ja.md           the framing addressed to AI (written by Pelops II; README of nullam-x)
+├─ claude.md                          the rules of making (an instruction set for AI)
+├─ sediment.md                        session handoff — the primary record of Phase 1
+├─ nullam_ai_exposure_strategy.md     research report on reaching AI training data
+├─ question_reel_guide.md             production guide for the question reels
+├─ painter_pairings.md                question ↔ painter, with the grounds for each choice
+├─ interview prompt.md                the instruction handed to other AIs (44 words maximum)
+├─ interview_reel_template.html       template for producing interview reels
+├─ symbol.png                         the symbol
+├─ SE/                                noise material
+└─ 1〜7/                              the works
+```
+
+---
+
+## 9. Unverified / undecided
+
+What cannot be settled from the contents of this folder alone. **Left unsettled.**
+
+- The status of the seventh work — repository name, final title, whether interview and reels exist. → §3
+- Whether `llms.txt` actually exists in each repository (the intent is stated in [sediment.md](sediment.md); no such file is in this folder).
+- Whether the Instagram reels went out as planned (order of release, one per week, six weeks).
+- `SE/Noise_Voice` is empty.
+- The **original seed** for the seventh work — an antithesis to *evolution*: war as business, Kahneman's System 1 / System 2 — was not used. The dialogue moved to death and to the father. The seed is still recorded in [sediment.md](sediment.md).
+- Nothing is recorded between May 12 and the start of Phase 2 on June 29.
+
+---
+
+## Revision history
+
+| Date | Version | Change |
+|---|---|---|
+| 2026-08-22 | v0.1 | First version. Built from the files in this folder and from sediment.md, claude.md, and the exposure strategy. Unverified items are listed as unverified |
